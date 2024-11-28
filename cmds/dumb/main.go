@@ -4,10 +4,10 @@ import (
 	"log"
 	"time"
 
-	pipe "github.com/ipush/littlepipe"
-	"github.com/ipush/littlepipe/sink/stdout"
-	"github.com/ipush/littlepipe/source/stdin"
-	"github.com/ipush/littlepipe/stage/words"
+	pipe "github.com/ipush/littlepipe/pkg/pipeline"
+	"github.com/ipush/littlepipe/pkg/sink/stdout"
+	"github.com/ipush/littlepipe/pkg/source/stdin"
+	"github.com/ipush/littlepipe/pkg/stage/words"
 )
 
 func main() {
@@ -21,7 +21,6 @@ func main() {
 	pipe := pipe.NewLittlePipe(config)
 	pipe.SetSource(stdin.NewStdinSource()).
 		AddStage(words.NewUppercaseStage()).
-		AddStage(words.NewFilterEmptyStage()).
 		SetSink(stdout.NewStdoutSink())
 
 	// 运行 pipeline

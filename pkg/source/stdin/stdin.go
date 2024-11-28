@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"io"
 	"os"
+
+	"github.com/ipush/littlepipe/pkg/pipeline"
 )
 
 type StdinSource struct {
@@ -16,9 +18,9 @@ func NewStdinSource() *StdinSource {
 	}
 }
 
-func (s *StdinSource) Read() (interface{}, error) {
+func (s *StdinSource) Read() (*pipeline.Message, error) {
 	if s.scanner.Scan() {
-		return s.scanner.Text(), nil
+		return pipeline.NewMessage(s.scanner.Text()), nil
 	}
 	if err := s.scanner.Err(); err != nil {
 		return nil, err

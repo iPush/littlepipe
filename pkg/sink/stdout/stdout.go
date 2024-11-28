@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+	"github.com/ipush/littlepipe/pkg/pipeline"
 )
 
 // StdoutSink 将数据写入标准输出
@@ -17,8 +19,8 @@ func NewStdoutSink() *StdoutSink {
 	}
 }
 
-func (s *StdoutSink) Write(data interface{}) error {
-	if str, ok := data.(string); ok {
+func (s *StdoutSink) Write(data *pipeline.Message) error {
+	if str, ok := data.Payload.(string); ok {
 		_, err := s.writer.WriteString(str + "\n")
 		if err != nil {
 			return err

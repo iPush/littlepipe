@@ -1,4 +1,4 @@
-package littlepipe
+package pipeline
 
 import (
 	"context"
@@ -55,9 +55,9 @@ func (p *LittlePipe) Run() error {
 		return fmt.Errorf("source and sink are required")
 	}
 
-	channels := make([]chan any, len(p.stages)+1)
+	channels := make([]chan *Message, len(p.stages)+1)
 	for i := range channels {
-		channels[i] = make(chan any, p.config.BufferSize)
+		channels[i] = make(chan *Message, p.config.BufferSize)
 	}
 
 	var wg sync.WaitGroup
@@ -145,16 +145,4 @@ func waitChanClosed(ch <-chan error) chan struct{} {
 		close(done)
 	}()
 	return done
-}
-
-type Source interface {
-	Read() (interface{}, error)
-}
-
-type Stage interface {
-	Process(data any) (any, error)
-}
-
-type Sink interface {
-	Write(data any) error
 }
