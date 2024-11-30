@@ -6,6 +6,8 @@ import (
 	"io"
 	"sync"
 	"time"
+
+	"github.com/ipush/littlepipe/pkg/observability"
 )
 
 type Config struct {
@@ -13,6 +15,10 @@ type Config struct {
 	Concurrency int
 	RetryCount  int
 	RetryDelay  time.Duration
+
+	Logger  observability.Logger
+	Tracer  *observability.Tracer
+	Metrics *observability.Metrics
 }
 
 type LittlePipe struct {
