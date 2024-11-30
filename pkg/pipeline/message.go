@@ -1,6 +1,7 @@
 package pipeline
 
 import (
+	"context"
 	"time"
 
 	"github.com/google/uuid"
@@ -12,6 +13,10 @@ type Message struct {
 	Metadata  map[string]any
 	CreatedAt time.Time
 	Error     error
+
+	TraceID string
+	SpanID  string
+	Context context.Context
 }
 
 func NewMessage(payload any) *Message {
