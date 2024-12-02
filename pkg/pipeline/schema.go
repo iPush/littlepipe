@@ -37,7 +37,7 @@ const (
 	TypeString
 	TypeInt64
 	TypeFloat64
-	TypeBool
+	TypeBoolean
 	TypeList
 	TypeDict
 	TypeDecimal
