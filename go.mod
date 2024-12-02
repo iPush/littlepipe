@@ -5,6 +5,7 @@ go 1.22
 toolchain go1.23.3
 
 require (
+	github.com/expr-lang/expr v1.16.9
 	github.com/google/uuid v1.6.0
 	github.com/prometheus/client_golang v1.20.5
 	go.opentelemetry.io/otel v1.32.0
