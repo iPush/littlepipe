@@ -9,7 +9,7 @@ import (
 
 type Message struct {
 	ID        string
-	Payload   any
+	Payload   *Record
 	Metadata  map[string]any
 	CreatedAt time.Time
 	Error     error
@@ -19,7 +19,7 @@ type Message struct {
 	Context context.Context
 }
 
-func NewMessage(payload any) *Message {
+func NewMessage(payload *Record) *Message {
 	return &Message{
 		ID:        uuid.New().String(),
 		Payload:   payload,
