@@ -7,16 +7,25 @@ import (
 	"go.uber.org/zap"
 )
 
+type Closer interface {
+	Close() error
+}
 type Source interface {
 	Read() (*Message, error)
+	BatchRead() ([]*Message, error)
+	Closer
 }
 
 type Sink interface {
 	Write(data *Message) error
+	BatchWrite(data []*Message) error
+	Closer
 }
 
 type Stage interface {
 	Process(data *Message) (*Message, error)
+	BatchProcess(data []*Message) ([]*Message, error)
+	Closer
 }
 
 // ObservableStage 可观测的阶段
